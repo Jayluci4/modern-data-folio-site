@@ -57,7 +57,7 @@ const Contact = () => {
     {
       name: "GitHub",
       icon: <Github className="h-5 w-5" />,
-      url: "#",
+      url: "https://github.com/Jayluci4",
       handle: "View my repositories"
     }
   ];
@@ -229,12 +229,12 @@ const Contact = () => {
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2 text-muted-foreground">
-                  <li>• Machine Learning & AI Development</li>
-                  <li>• Data Analytics & Visualization</li>
-                  <li>• Predictive Modeling</li>
-                  <li>• Data Pipeline Architecture</li>
-                  <li>• Business Intelligence Solutions</li>
-                  <li>• Research & Development Projects</li>
+                  <li>• AI/ML Systems & RAG Development</li>
+                  <li>• NLP & Vector Search Solutions</li>
+                  <li>• Production AI Infrastructure</li>
+                  <li>• Intelligent Retrieval Systems</li>
+                  <li>• Startup & Tech Consulting</li>
+                  <li>• Remote/Global Opportunities</li>
                 </ul>
               </CardContent>
             </Card>

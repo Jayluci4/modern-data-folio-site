@@ -4,34 +4,48 @@ import { Code, Database, Brain, TrendingUp } from "lucide-react";
 
 const About = () => {
   const skills = [
-    { category: "Programming", items: ["Python", "R", "SQL", "JavaScript", "Java"] },
-    { category: "ML/AI", items: ["Scikit-learn", "TensorFlow", "PyTorch", "Keras", "XGBoost"] },
-    { category: "Data Tools", items: ["Pandas", "NumPy", "Matplotlib", "Seaborn", "Plotly"] },
-    { category: "Databases", items: ["PostgreSQL", "MongoDB", "MySQL", "Redis"] },
-    { category: "Cloud", items: ["AWS", "Google Cloud", "Azure", "Docker"] },
-    { category: "Visualization", items: ["Tableau", "Power BI", "D3.js", "Grafana"] }
+    { 
+      category: "🧠 NLP & AI Stack", 
+      items: ["FastAPI + Docker for production NLP models", "LangChain", "SentenceTransformers", "Ollama", "PEFT", "SELF-RAG"],
+      description: "Production-ready AI systems and retrieval pipelines"
+    },
+    { 
+      category: "📊 Data Engineering", 
+      items: ["Pandas + PostgreSQL for 1M+ records/day", "Vector databases", "Pinecone", "ETL pipelines"],
+      description: "Built ETL pipelines with Pandas + PostgreSQL processing 1M+ records daily"
+    },
+    { 
+      category: "⚡ Core Technologies", 
+      items: ["Python", "SQL", "JavaScript", "TensorFlow", "PyTorch", "Scikit-learn"],
+      description: "Foundation technologies for AI development"
+    },
+    { 
+      category: "☁️ Infrastructure", 
+      items: ["AWS", "Docker", "PostgreSQL", "MongoDB", "FastAPI"],
+      description: "Scalable deployment and data management"
+    }
   ];
 
   const achievements = [
     {
-      icon: <TrendingUp className="h-6 w-6" />,
-      title: "Performance Optimization",
-      description: "Improved model accuracy by 15% through advanced feature engineering"
+      icon: <Brain className="h-6 w-6" />,
+      title: "AI-Powered Matching",
+      description: "Built investor-founder matchmaking engine serving 150K+ users"
     },
     {
       icon: <Database className="h-6 w-6" />,
-      title: "Data Pipeline",
-      description: "Built automated ETL pipelines processing 1M+ records daily"
+      title: "NLP Classification",
+      description: "99.99% accuracy across 1K+ startup taxonomies with 2L+ records"
     },
     {
-      icon: <Brain className="h-6 w-6" />,
-      title: "ML Models",
-      description: "Deployed 10+ machine learning models in production"
+      icon: <TrendingUp className="h-6 w-6" />,
+      title: "Vector Search Systems",
+      description: "Production RAG systems with semantic retrieval and vector databases"
     },
     {
       icon: <Code className="h-6 w-6" />,
-      title: "Code Quality",
-      description: "Maintained 95%+ code coverage with comprehensive testing"
+      title: "Infrastructure Leadership",
+      description: "Led AI infrastructure development and team mentorship"
     }
   ];
 
@@ -43,9 +57,8 @@ const About = () => {
             About <span className="text-gradient">Me</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Passionate data scientist with 2+ years of experience transforming raw data into 
-            strategic business insights. Currently working at Startt, I specialize in machine 
-            learning, predictive analytics, and building scalable data solutions.
+            Former Head of AI at Startt with 2+ years of experience building production-ready AI systems. 
+            Specialized in NLP, vector search, and intelligent retrieval systems that power real-world applications.
           </p>
         </div>
 
@@ -57,13 +70,13 @@ const About = () => {
               <CardContent className="p-6">
                 <div className="space-y-6">
                   <div>
-                    <h4 className="text-xl font-semibold text-foreground">Data Scientist</h4>
-                    <p className="text-primary mb-2">Startt • 2022 - Present</p>
+                    <h4 className="text-xl font-semibold text-foreground">Head of AI</h4>
+                    <p className="text-primary mb-2">Startt • 2022 - 2024</p>
                     <ul className="text-muted-foreground space-y-2">
-                      <li>• Developed ML models for predictive analytics and customer segmentation</li>
-                      <li>• Built automated data pipelines reducing processing time by 40%</li>
-                      <li>• Collaborated with cross-functional teams to deliver data-driven solutions</li>
-                      <li>• Mentored junior analysts and established best practices for data science workflows</li>
+                      <li>• Built NLP pipelines classifying 2L+ startups across 1K+ taxonomies with 99.99% accuracy</li>
+                      <li>• Architected AI-powered investor matchmaking engine serving 150K+ active users</li>
+                      <li>• Deployed production-ready RAG systems using vector search and semantic retrieval</li>
+                      <li>• Led AI infrastructure development and mentored engineering teams</li>
                     </ul>
                   </div>
                 </div>
@@ -100,10 +113,13 @@ const About = () => {
             {skills.map((skillGroup, index) => (
               <Card key={skillGroup.category} className="glass-card border-border/50 hover:border-primary/30 transition-colors">
                 <CardContent className="p-6">
-                  <h4 className="font-semibold mb-4 text-accent">{skillGroup.category}</h4>
+                  <h4 className="font-semibold mb-3 text-accent">{skillGroup.category}</h4>
+                  {skillGroup.description && (
+                    <p className="text-sm text-muted-foreground mb-4 italic">{skillGroup.description}</p>
+                  )}
                   <div className="flex flex-wrap gap-2">
                     {skillGroup.items.map((skill) => (
-                      <Badge key={skill} variant="outline" className="border-primary/30">
+                      <Badge key={skill} variant="outline" className="border-primary/30 text-xs">
                         {skill}
                       </Badge>
                     ))}

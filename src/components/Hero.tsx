@@ -25,14 +25,18 @@ const Hero = () => {
           {/* Left side - Text content */}
           <div className="flex-1 text-center lg:text-left animate-fade-in">
             <h1 className="text-5xl lg:text-7xl font-bold mb-6">
-              <span className="text-gradient">Data Scientist</span>
+              <span className="text-gradient">AI Engineer</span>
               <br />
-              <span className="text-foreground">& ML Engineer</span>
+              <span className="text-foreground">& Data Scientist</span>
             </h1>
             
             <p className="text-xl lg:text-2xl text-muted-foreground mb-8 max-w-2xl">
-              Transforming complex data into actionable insights with 2+ years of experience in 
-              machine learning, analytics, and AI solutions.
+              Architected India's first AI-powered investor matchmaking engine used by 150K+ founders. 
+              I work at the intersection of NLP, vector search, and intelligent retrieval systems.
+            </p>
+            
+            <p className="text-lg text-muted-foreground/80 mb-8">
+              🇮🇳 India-based • Open to remote/global roles
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">

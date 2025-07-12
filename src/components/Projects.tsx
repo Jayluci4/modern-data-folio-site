@@ -8,33 +8,36 @@ const Projects = () => {
   const [projects] = useState([
     {
       id: 1,
-      title: "Customer Churn Prediction Model",
-      description: "Built a machine learning model to predict customer churn with 92% accuracy using ensemble methods and feature engineering.",
-      technologies: ["Python", "Scikit-learn", "XGBoost", "Pandas", "Flask"],
+      title: "AI-Powered Investor Matchmaking Engine",
+      description: "Architected production-ready RAG system serving 150K+ users with semantic search and vector databases for intelligent investor-founder matching.",
+      technologies: ["Python", "FastAPI", "Pinecone", "LangChain", "PostgreSQL", "Docker"],
       image: "/api/placeholder/400/250",
-      githubUrl: "#",
+      githubUrl: "https://github.com/Jayluci4",
       liveUrl: "#",
-      category: "Machine Learning"
+      category: "AI/RAG Systems",
+      featured: true
     },
     {
       id: 2,
-      title: "Real-time Analytics Dashboard",
-      description: "Developed an interactive dashboard for real-time data visualization and KPI monitoring using modern web technologies.",
-      technologies: ["React", "D3.js", "Node.js", "PostgreSQL", "WebSocket"],
+      title: "Unified Startup Taxonomy Classifier", 
+      description: "Built NLP pipeline classifying 2L+ startups across 1K+ taxonomies with 99.99% accuracy using advanced feature engineering and ensemble methods.",
+      technologies: ["Python", "SentenceTransformers", "Scikit-learn", "TensorFlow", "Pandas"],
       image: "/api/placeholder/400/250",
-      githubUrl: "#",
+      githubUrl: "https://github.com/Jayluci4",
       liveUrl: "#",
-      category: "Data Visualization"
+      category: "NLP/Classification",
+      featured: true
     },
     {
       id: 3,
-      title: "NLP Sentiment Analysis Engine",
-      description: "Created a sentiment analysis system for social media monitoring with multi-language support and real-time processing.",
-      technologies: ["Python", "NLTK", "Transformers", "FastAPI", "Docker"],
+      title: "SELF-RAG Agent Infrastructure",
+      description: "Developed production infrastructure for self-reflective RAG agents with advanced retrieval strategies and performance optimization.",
+      technologies: ["Python", "SELF-RAG", "Vector Search", "FastAPI", "PEFT", "Ollama"],
       image: "/api/placeholder/400/250",
-      githubUrl: "#",
+      githubUrl: "https://github.com/Jayluci4",
       liveUrl: "#",
-      category: "NLP"
+      category: "AI Infrastructure",
+      featured: true
     }
   ]);
 
@@ -46,8 +49,8 @@ const Projects = () => {
             My <span className="text-gradient">Projects</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            A showcase of my data science projects, from machine learning models to 
-            interactive dashboards and AI-powered applications.
+            Production-ready AI systems, NLP pipelines, and intelligent retrieval engines 
+            that power real-world applications at scale.
           </p>
         </div>
 
@@ -137,9 +140,12 @@ const Projects = () => {
                 Connect your GitHub account to automatically showcase your latest data science projects. 
                 Projects will be updated dynamically as you push new work.
               </p>
-              <Button className="gradient-primary text-white">
+              <Button 
+                className="gradient-primary text-white"
+                onClick={() => window.open('https://github.com/Jayluci4', '_blank')}
+              >
                 <Github className="h-4 w-4 mr-2" />
-                Connect GitHub Account
+                View GitHub Profile
               </Button>
             </CardContent>
           </Card>
