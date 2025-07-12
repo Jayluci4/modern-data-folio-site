@@ -51,7 +51,7 @@ const Contact = () => {
     {
       name: "LinkedIn",
       icon: <Linkedin className="h-5 w-5" />,
-      url: "#",
+      url: "https://linkedin.com/in/jayant-lohia",
       handle: "Connect on LinkedIn"
     },
     {

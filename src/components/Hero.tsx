@@ -9,15 +9,38 @@ const Hero = () => {
 
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-primary opacity-10" />
+      {/* Animated background gradient */}
+      <div className="absolute inset-0 bg-gradient-primary opacity-10 animate-gradient-shift" />
       
-      {/* Floating particles */}
+      {/* Data streams/Matrix rain effect */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Data stream elements */}
+        <div className="absolute left-10 w-px h-20 bg-primary/20 animate-matrix-rain" style={{ animationDelay: '0s' }} />
+        <div className="absolute left-20 w-px h-16 bg-accent/20 animate-matrix-rain" style={{ animationDelay: '3s' }} />
+        <div className="absolute left-32 w-px h-24 bg-primary/30 animate-matrix-rain" style={{ animationDelay: '6s' }} />
+        <div className="absolute right-20 w-px h-18 bg-accent/25 animate-matrix-rain" style={{ animationDelay: '2s' }} />
+        <div className="absolute right-32 w-px h-20 bg-primary/25 animate-matrix-rain" style={{ animationDelay: '8s' }} />
+        <div className="absolute right-40 w-px h-22 bg-accent/20 animate-matrix-rain" style={{ animationDelay: '4s' }} />
+        
+        {/* Binary code streams */}
+        <div className="absolute left-1/4 text-xs text-primary/20 animate-matrix-rain font-mono" style={{ animationDelay: '1s' }}>
+          01101001<br/>11010101<br/>00101010
+        </div>
+        <div className="absolute right-1/4 text-xs text-accent/20 animate-matrix-rain font-mono" style={{ animationDelay: '7s' }}>
+          10110100<br/>01011010<br/>11001100
+        </div>
+      </div>
+      
+      {/* Enhanced floating particles */}
       <div className="absolute inset-0">
-        <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-primary rounded-full animate-float" style={{ animationDelay: '0s' }} />
+        <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-primary rounded-full animate-float animate-pulse-glow" style={{ animationDelay: '0s' }} />
         <div className="absolute top-1/3 right-1/4 w-1 h-1 bg-accent rounded-full animate-float" style={{ animationDelay: '1s' }} />
-        <div className="absolute bottom-1/3 left-1/3 w-1.5 h-1.5 bg-primary/60 rounded-full animate-float" style={{ animationDelay: '2s' }} />
+        <div className="absolute bottom-1/3 left-1/3 w-1.5 h-1.5 bg-primary/60 rounded-full animate-float animate-pulse-glow" style={{ animationDelay: '2s' }} />
         <div className="absolute top-2/3 right-1/3 w-1 h-1 bg-accent/60 rounded-full animate-float" style={{ animationDelay: '1.5s' }} />
+        {/* Additional particles for more life */}
+        <div className="absolute top-1/6 left-1/2 w-1.5 h-1.5 bg-accent rounded-full animate-float" style={{ animationDelay: '3s' }} />
+        <div className="absolute bottom-1/4 right-1/6 w-2 h-2 bg-primary/40 rounded-full animate-float animate-pulse-glow" style={{ animationDelay: '2.5s' }} />
+        <div className="absolute top-3/4 left-1/6 w-1 h-1 bg-accent/80 rounded-full animate-float" style={{ animationDelay: '4s' }} />
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
@@ -60,16 +83,23 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Right side - Profile image */}
+          {/* Right side - Profile image with enhanced animations */}
           <div className="flex-1 max-w-md animate-slide-up">
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-primary rounded-full blur-2xl opacity-30 scale-110" />
-              <div className="relative glass-card rounded-full p-2">
+              <div className="absolute inset-0 bg-gradient-primary rounded-full blur-2xl opacity-30 scale-110 animate-pulse-glow" />
+              <div className="relative glass-card rounded-full p-2 animate-pulse-glow">
                 <img 
                   src="/lovable-uploads/8eb92eee-3bbe-4f37-9830-9d10b1e97a50.png" 
-                  alt="Jayant Lohia - Data Scientist"
-                  className="w-full h-full object-cover rounded-full"
+                  alt="Jayant Lohia - AI Engineer"
+                  className="w-full h-full object-cover rounded-full hover:scale-105 transition-transform duration-300"
                 />
+                {/* Orbiting elements around profile */}
+                <div className="absolute -inset-4">
+                  <div className="absolute top-0 left-1/2 w-2 h-2 bg-primary rounded-full animate-float" style={{ animationDelay: '0s' }} />
+                  <div className="absolute right-0 top-1/2 w-1.5 h-1.5 bg-accent rounded-full animate-float" style={{ animationDelay: '2s' }} />
+                  <div className="absolute bottom-0 left-1/2 w-1 h-1 bg-primary/60 rounded-full animate-float" style={{ animationDelay: '4s' }} />
+                  <div className="absolute left-0 top-1/2 w-1.5 h-1.5 bg-accent/60 rounded-full animate-float" style={{ animationDelay: '1s' }} />
+                </div>
               </div>
             </div>
           </div>
