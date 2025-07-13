@@ -23,6 +23,7 @@ const Navigation = () => {
   const navItems = [
     { label: "About", id: "about" },
     { label: "Projects", id: "projects" },
+    { label: "RAG Chat", id: "rag-chat" },
     { label: "Contact", id: "contact" }
   ];
 
