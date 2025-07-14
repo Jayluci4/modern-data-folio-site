@@ -295,7 +295,7 @@ const RAGChat = () => {
                 <div className="flex-1 overflow-y-auto p-6 space-y-4">
                   {messages.length === 0 ? <div className="text-center py-12">
                       <Sparkles className="h-12 w-12 text-primary mx-auto mb-4" />
-                      <h3 className="text-lg font-semibold mb-2">Welcome to RAG Chat</h3>
+                      <h3 className="text-lg font-semibold mb-2">Ask Anything...</h3>
                       <p className="text-muted-foreground">
                         Upload documents and start chatting with your knowledge base
                       </p>
