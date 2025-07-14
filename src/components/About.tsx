@@ -57,7 +57,7 @@ const About = () => {
                 <div className="space-y-6">
                   <div>
                     <h4 className="text-xl font-semibold text-foreground">Head of AI</h4>
-                    <p className="text-primary mb-2">Startt • 2022 - 2024</p>
+                    <p className="text-primary mb-2">Startt • Jan 2025 - Present</p>
                     <ul className="text-muted-foreground space-y-2">
                       <li>• Built NLP pipelines classifying 2L+ startups across 1K+ taxonomies with 99.99% accuracy</li>
                       <li>• Architected AI-powered investor matchmaking engine serving 150K+ active users</li>
