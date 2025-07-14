@@ -110,7 +110,7 @@ const Projects = () => {
             <CardContent className="p-6">
               <div className="flex items-center justify-center mb-4">
                 <Github className="h-8 w-8 text-primary mr-3" />
-                <h3 className="text-xl font-semibold">GitHub Integration</h3>
+                <h3 className="text-xl font-semibold">GitHub</h3>
               </div>
               <p className="text-muted-foreground mb-4">Click the button below to explore more about my contributions on github</p>
               <Button className="gradient-primary text-white" onClick={() => window.open('https://github.com/Jayluci4', '_blank')}>
