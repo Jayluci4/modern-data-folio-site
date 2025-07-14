@@ -59,7 +59,7 @@ const Hero = () => {
             </p>
             
             <p className="text-lg text-muted-foreground/80 mb-8">
-              🇮🇳 India-based • Open to remote/global roles
+              🇮🇳 Guwahati, India-based • Open to remote/global roles
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">

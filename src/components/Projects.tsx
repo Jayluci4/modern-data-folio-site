@@ -92,20 +92,11 @@ const Projects = () => {
                 <div className="flex gap-2">
                   <Button
                     size="sm"
-                    variant="outline"
-                    className="border-primary/30 hover:bg-primary/10"
-                    onClick={() => window.open(project.githubUrl, '_blank')}
-                  >
-                    <Github className="h-4 w-4 mr-2" />
-                    Code
-                  </Button>
-                  <Button
-                    size="sm"
-                    className="gradient-primary text-white hover:opacity-90"
+                    className="gradient-primary text-white hover:opacity-90 w-full"
                     onClick={() => window.open(project.liveUrl, '_blank')}
                   >
                     <ExternalLink className="h-4 w-4 mr-2" />
-                    Live Demo
+                    View Project
                   </Button>
                 </div>
               </CardContent>
