@@ -98,11 +98,11 @@ serve(async (req) => {
       );
     }
 
-    // Validate API key format
-    if (!apiKey.startsWith('AIza')) {
+    // Basic API key validation - just check it's not empty and has reasonable length
+    if (!apiKey.trim() || apiKey.trim().length < 10) {
       console.error('Invalid API key format');
       return new Response(
-        JSON.stringify({ error: 'Invalid API key format. Gemini API keys should start with "AIza"' }),
+        JSON.stringify({ error: 'Invalid API key format. Please check your Gemini API key.' }),
         { 
           status: 400, 
           headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
@@ -132,9 +132,11 @@ Instructions:
       }
     }
 
+    console.log('Calling Gemini API with prompt length:', `${systemPrompt}\n\nUser question: ${message}`.length);
+    
     // Call Google Gemini API
     const geminiResponse = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
       {
         method: 'POST',
         headers: {
@@ -162,16 +164,39 @@ Instructions:
 
     if (!geminiResponse.ok) {
       const errorData = await geminiResponse.text();
-      console.error('Gemini API error:', errorData);
+      console.error('Gemini API error:', { 
+        status: geminiResponse.status, 
+        statusText: geminiResponse.statusText, 
+        error: errorData 
+      });
       
-      // Check for API key related errors
-      if (geminiResponse.status === 400 && errorData.includes('API_KEY_INVALID')) {
-        throw new Error('Invalid API key. Please check your Gemini API key and try again.');
-      } else if (geminiResponse.status === 403) {
-        throw new Error('API key permission denied. Please verify your Gemini API key has the correct permissions.');
-      } else {
-        throw new Error(`Gemini API error: ${geminiResponse.status} - ${errorData}`);
+      // Parse error message if possible
+      let errorMessage = 'Failed to get response from Gemini API';
+      try {
+        const parsedError = JSON.parse(errorData);
+        if (parsedError.error?.message) {
+          errorMessage = parsedError.error.message;
+        }
+      } catch (e) {
+        // Use generic message if parsing fails
       }
+      
+      // Return specific error based on status code
+      if (geminiResponse.status === 400) {
+        errorMessage = `API Error: ${errorMessage}. Please check your API key and try again.`;
+      } else if (geminiResponse.status === 403) {
+        errorMessage = 'API key is invalid or lacks permission. Please check your Gemini API key.';
+      } else if (geminiResponse.status === 429) {
+        errorMessage = 'Rate limit exceeded. Please try again later.';
+      }
+      
+      return new Response(
+        JSON.stringify({ error: errorMessage }),
+        { 
+          status: geminiResponse.status, 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
+        }
+      );
     }
 
     const geminiData = await geminiResponse.json();

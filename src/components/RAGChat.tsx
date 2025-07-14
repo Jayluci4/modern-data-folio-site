@@ -165,7 +165,15 @@ const RAGChat = () => {
         }
       });
 
-      if (error) throw error;
+      if (error) {
+        console.error('Supabase function error:', error);
+        throw new Error(`Failed to get response from AI service: ${error.message || 'Unknown error'}`);
+      }
+
+      if (data?.error) {
+        console.error('AI service error:', data.error);
+        throw new Error(data.error);
+      }
 
       // Simulate streaming response
       const response = data.response || "I apologize, but I couldn't generate a response at this time.";
@@ -187,17 +195,19 @@ const RAGChat = () => {
       }
 
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error sending message:', error);
+      const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred. Please check your API key and try again.';
+      
       setMessages(prev => 
         prev.map(msg => 
           msg.id === assistantMessage.id 
-            ? { ...msg, content: "I apologize, but I encountered an error while processing your request. Please check your API key and try again." }
+            ? { ...msg, content: `Error: ${errorMessage}` }
             : msg
         )
       );
       toast({
         title: "Error",
-        description: "Failed to get response. Please check your API key and try again.",
+        description: errorMessage,
         variant: "destructive"
       });
     } finally {
