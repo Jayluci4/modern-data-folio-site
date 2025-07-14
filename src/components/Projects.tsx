@@ -3,46 +3,39 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ExternalLink, Github, Plus, Upload } from "lucide-react";
-
 const Projects = () => {
-  const [projects] = useState([
-    {
-      id: 1,
-      title: "AI-Powered Investor Matchmaking Engine",
-      description: "Architected production-ready RAG system serving 150K+ users with semantic search and vector databases for intelligent investor-founder matching.",
-      technologies: ["Python", "FastAPI", "Pinecone", "LangChain", "PostgreSQL", "Docker"],
-      image: "/api/placeholder/400/250",
-      githubUrl: "https://github.com/Jayluci4",
-      liveUrl: "#",
-      category: "AI/RAG Systems",
-      featured: true
-    },
-    {
-      id: 2,
-      title: "Unified Startup Taxonomy Classifier", 
-      description: "Built NLP pipeline classifying 2L+ startups across 1K+ taxonomies with 99.99% accuracy using advanced feature engineering and ensemble methods.",
-      technologies: ["Python", "SentenceTransformers", "Scikit-learn", "TensorFlow", "Pandas"],
-      image: "/api/placeholder/400/250",
-      githubUrl: "https://github.com/Jayluci4",
-      liveUrl: "#",
-      category: "NLP/Classification",
-      featured: true
-    },
-    {
-      id: 3,
-      title: "SELF-RAG Agent Infrastructure",
-      description: "Developed production infrastructure for self-reflective RAG agents with advanced retrieval strategies and performance optimization.",
-      technologies: ["Python", "SELF-RAG", "Vector Search", "FastAPI", "PEFT", "Ollama"],
-      image: "/api/placeholder/400/250",
-      githubUrl: "https://github.com/Jayluci4",
-      liveUrl: "#",
-      category: "AI Infrastructure",
-      featured: true
-    }
-  ]);
-
-  return (
-    <section id="projects" className="py-20 relative">
+  const [projects] = useState([{
+    id: 1,
+    title: "AI-Powered Investor Matchmaking Engine",
+    description: "Architected production-ready RAG system serving 150K+ users with semantic search and vector databases for intelligent investor-founder matching.",
+    technologies: ["Python", "FastAPI", "Pinecone", "LangChain", "PostgreSQL", "Docker"],
+    image: "/api/placeholder/400/250",
+    githubUrl: "https://github.com/Jayluci4",
+    liveUrl: "#",
+    category: "AI/RAG Systems",
+    featured: true
+  }, {
+    id: 2,
+    title: "Unified Startup Taxonomy Classifier",
+    description: "Built NLP pipeline classifying 2L+ startups across 1K+ taxonomies with 99.99% accuracy using advanced feature engineering and ensemble methods.",
+    technologies: ["Python", "SentenceTransformers", "Scikit-learn", "TensorFlow", "Pandas"],
+    image: "/api/placeholder/400/250",
+    githubUrl: "https://github.com/Jayluci4",
+    liveUrl: "#",
+    category: "NLP/Classification",
+    featured: true
+  }, {
+    id: 3,
+    title: "SELF-RAG Agent Infrastructure",
+    description: "Developed production infrastructure for self-reflective RAG agents with advanced retrieval strategies and performance optimization.",
+    technologies: ["Python", "SELF-RAG", "Vector Search", "FastAPI", "PEFT", "Ollama"],
+    image: "/api/placeholder/400/250",
+    githubUrl: "https://github.com/Jayluci4",
+    liveUrl: "#",
+    category: "AI Infrastructure",
+    featured: true
+  }]);
+  return <section id="projects" className="py-20 relative">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold mb-6">
@@ -55,8 +48,7 @@ const Projects = () => {
         </div>
 
         <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-8 mb-12">
-          {projects.map((project) => (
-            <Card key={project.id} className="glass-card border-border/50 hover:border-primary/30 transition-all duration-300 group">
+          {projects.map(project => <Card key={project.id} className="glass-card border-border/50 hover:border-primary/30 transition-all duration-300 group">
               <CardHeader className="p-0">
                 <div className="relative overflow-hidden rounded-t-lg">
                   <div className="w-full h-48 bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center">
@@ -82,26 +74,19 @@ const Projects = () => {
                 </CardDescription>
                 
                 <div className="flex flex-wrap gap-2 mb-6">
-                  {project.technologies.map((tech) => (
-                    <Badge key={tech} variant="secondary" className="text-xs">
+                  {project.technologies.map(tech => <Badge key={tech} variant="secondary" className="text-xs">
                       {tech}
-                    </Badge>
-                  ))}
+                    </Badge>)}
                 </div>
                 
                 <div className="flex gap-2">
-                  <Button
-                    size="sm"
-                    className="gradient-primary text-white hover:opacity-90 w-full"
-                    onClick={() => window.open(project.liveUrl, '_blank')}
-                  >
+                  <Button size="sm" className="gradient-primary text-white hover:opacity-90 w-full" onClick={() => window.open(project.liveUrl, '_blank')}>
                     <ExternalLink className="h-4 w-4 mr-2" />
                     View Project
                   </Button>
                 </div>
               </CardContent>
-            </Card>
-          ))}
+            </Card>)}
           
           {/* Add New Project Card */}
           <Card className="glass-card border-dashed border-border/50 hover:border-primary/30 transition-all duration-300 group cursor-pointer">
@@ -127,14 +112,8 @@ const Projects = () => {
                 <Github className="h-8 w-8 text-primary mr-3" />
                 <h3 className="text-xl font-semibold">GitHub Integration</h3>
               </div>
-              <p className="text-muted-foreground mb-4">
-                Connect your GitHub account to automatically showcase your latest data science projects. 
-                Projects will be updated dynamically as you push new work.
-              </p>
-              <Button 
-                className="gradient-primary text-white"
-                onClick={() => window.open('https://github.com/Jayluci4', '_blank')}
-              >
+              <p className="text-muted-foreground mb-4">Click the button below to explore more about my contributions on github</p>
+              <Button className="gradient-primary text-white" onClick={() => window.open('https://github.com/Jayluci4', '_blank')}>
                 <Github className="h-4 w-4 mr-2" />
                 View GitHub Profile
               </Button>
@@ -142,8 +121,6 @@ const Projects = () => {
           </Card>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Projects;
