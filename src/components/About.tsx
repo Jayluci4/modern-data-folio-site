@@ -78,7 +78,7 @@ const About = () => {
                 <div className="space-y-4">
                   <div>
                     <h4 className="text-lg font-semibold">AI in Healthcare, Stanford CME (2024)</h4>
-                    <p className="text-muted-foreground">B.Tech – Electrical and Electronics Engineering Indian Institute of Technology, Guwahati - Class of 2023 </p>
+                    <p className="text-muted-foreground font-medium text-base">B.Tech – Electrical and Electronics Engineering Indian Institute of Technology, Guwahati - Class of 2023 </p>
                   </div>
                   <div className="flex flex-wrap gap-2">
                     <Badge variant="secondary">Machine Learning</Badge>
