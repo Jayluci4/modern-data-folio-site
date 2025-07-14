@@ -150,7 +150,15 @@ Instructions:
     if (!geminiResponse.ok) {
       const errorData = await geminiResponse.text();
       console.error('Gemini API error:', errorData);
-      throw new Error(`Gemini API error: ${geminiResponse.status} - ${errorData}`);
+      
+      // Check for API key related errors
+      if (geminiResponse.status === 400 && errorData.includes('API_KEY_INVALID')) {
+        throw new Error('Invalid API key. Please check your Gemini API key and try again.');
+      } else if (geminiResponse.status === 403) {
+        throw new Error('API key permission denied. Please verify your Gemini API key has the correct permissions.');
+      } else {
+        throw new Error(`Gemini API error: ${geminiResponse.status} - ${errorData}`);
+      }
     }
 
     const geminiData = await geminiResponse.json();

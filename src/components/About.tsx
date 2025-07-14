@@ -57,7 +57,7 @@ const About = () => {
             About <span className="text-gradient">Me</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Former Head of AI at Startt with 2+ years of experience building production-ready AI systems. 
+            Head of AI at Startt with 2+ years of experience building production-ready AI systems. 
             Specialized in NLP, vector search, and intelligent retrieval systems that power real-world applications.
           </p>
         </div>
