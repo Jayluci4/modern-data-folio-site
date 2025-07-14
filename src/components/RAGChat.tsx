@@ -5,36 +5,21 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { 
-  MessageSquare, 
-  Send, 
-  Upload, 
-  FileText, 
-  Key, 
-  Trash2, 
-  Bot,
-  User,
-  Loader2,
-  Settings,
-  Sparkles
-} from "lucide-react";
+import { MessageSquare, Send, Upload, FileText, Key, Trash2, Bot, User, Loader2, Settings, Sparkles } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-
 interface Message {
   id: string;
   content: string;
   role: 'user' | 'assistant';
   timestamp: Date;
 }
-
 interface Document {
   id: string;
   name: string;
   content: string;
   uploadedAt: Date;
 }
-
 const RAGChat = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputMessage, setInputMessage] = useState("");
@@ -44,7 +29,9 @@ const RAGChat = () => {
   const [showApiKeyInput, setShowApiKeyInput] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const { toast } = useToast();
+  const {
+    toast
+  } = useToast();
 
   // Auto-scroll to bottom when new messages arrive (only within chat container)
   useEffect(() => {
@@ -66,7 +53,6 @@ const RAGChat = () => {
       setShowApiKeyInput(true);
     }
   }, []);
-
   const saveApiKey = () => {
     if (!apiKey.trim()) {
       toast({
@@ -83,7 +69,6 @@ const RAGChat = () => {
       description: "Your Gemini API key has been saved locally"
     });
   };
-
   const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
@@ -97,7 +82,6 @@ const RAGChat = () => {
       });
       return;
     }
-
     try {
       const content = await file.text();
       const newDoc: Document = {
@@ -106,7 +90,6 @@ const RAGChat = () => {
         content,
         uploadedAt: new Date()
       };
-      
       setDocuments(prev => [...prev, newDoc]);
       toast({
         title: "Document Uploaded",
@@ -120,7 +103,6 @@ const RAGChat = () => {
       });
     }
   };
-
   const removeDocument = (docId: string) => {
     setDocuments(prev => prev.filter(doc => doc.id !== docId));
     toast({
@@ -128,10 +110,8 @@ const RAGChat = () => {
       description: "Document has been removed from your knowledge base"
     });
   };
-
   const sendMessage = async () => {
     if (!inputMessage.trim() || isStreaming) return;
-
     if (!apiKey) {
       setShowApiKeyInput(true);
       toast({
@@ -141,14 +121,12 @@ const RAGChat = () => {
       });
       return;
     }
-
     const userMessage: Message = {
       id: Date.now().toString(),
       content: inputMessage.trim(),
       role: 'user',
       timestamp: new Date()
     };
-
     setMessages(prev => [...prev, userMessage]);
     setInputMessage("");
     setIsStreaming(true);
@@ -161,21 +139,21 @@ const RAGChat = () => {
       timestamp: new Date()
     };
     setMessages(prev => [...prev, assistantMessage]);
-
     try {
-      const { data, error } = await supabase.functions.invoke('gemini-rag-chat', {
+      const {
+        data,
+        error
+      } = await supabase.functions.invoke('gemini-rag-chat', {
         body: {
           message: userMessage.content,
           documents: documents,
           apiKey: apiKey
         }
       });
-
       if (error) {
         console.error('Supabase function error:', error);
         throw new Error(`Failed to get response from AI service: ${error.message || 'Unknown error'}`);
       }
-
       if (data?.error) {
         console.error('AI service error:', data.error);
         throw new Error(data.error);
@@ -183,34 +161,26 @@ const RAGChat = () => {
 
       // Simulate streaming response
       const response = data.response || "I apologize, but I couldn't generate a response at this time.";
-      
+
       // Stream the response character by character
       let currentResponse = "";
       for (let i = 0; i < response.length; i++) {
         currentResponse += response[i];
-        setMessages(prev => 
-          prev.map(msg => 
-            msg.id === assistantMessage.id 
-              ? { ...msg, content: currentResponse }
-              : msg
-          )
-        );
-        
+        setMessages(prev => prev.map(msg => msg.id === assistantMessage.id ? {
+          ...msg,
+          content: currentResponse
+        } : msg));
+
         // Add delay for streaming effect
         await new Promise(resolve => setTimeout(resolve, 20));
       }
-
     } catch (error) {
       console.error('Error sending message:', error);
       const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred. Please check your API key and try again.';
-      
-      setMessages(prev => 
-        prev.map(msg => 
-          msg.id === assistantMessage.id 
-            ? { ...msg, content: `Error: ${errorMessage}` }
-            : msg
-        )
-      );
+      setMessages(prev => prev.map(msg => msg.id === assistantMessage.id ? {
+        ...msg,
+        content: `Error: ${errorMessage}`
+      } : msg));
       toast({
         title: "Error",
         description: errorMessage,
@@ -220,7 +190,6 @@ const RAGChat = () => {
       setIsStreaming(false);
     }
   };
-
   const clearChat = () => {
     setMessages([]);
     toast({
@@ -228,13 +197,11 @@ const RAGChat = () => {
       description: "All messages have been cleared"
     });
   };
-
-  return (
-    <section id="rag-chat" className="py-20 relative">
+  return <section id="rag-chat" className="py-20 relative">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-            <span className="text-gradient">AI RAG Chat</span> System
+            <span className="text-gradient">Custom RAG</span> System
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Interactive Retrieval-Augmented Generation chat powered by Google Gemini. 
@@ -253,49 +220,27 @@ const RAGChat = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <Button
-                  onClick={() => fileInputRef.current?.click()}
-                  variant="outline"
-                  size="sm"
-                  className="w-full border-primary/30 hover:bg-primary/10"
-                >
+                <Button onClick={() => fileInputRef.current?.click()} variant="outline" size="sm" className="w-full border-primary/30 hover:bg-primary/10">
                   <Upload className="h-4 w-4 mr-2" />
                   Upload Document
                 </Button>
                 
-                <input
-                  ref={fileInputRef}
-                  type="file"
-                  accept=".txt,.md,.text/*"
-                  onChange={handleFileUpload}
-                  className="hidden"
-                />
+                <input ref={fileInputRef} type="file" accept=".txt,.md,.text/*" onChange={handleFileUpload} className="hidden" />
 
                 <div className="space-y-2">
-                  {documents.length === 0 ? (
-                    <p className="text-sm text-muted-foreground text-center py-4">
+                  {documents.length === 0 ? <p className="text-sm text-muted-foreground text-center py-4">
                       No documents uploaded yet
-                    </p>
-                  ) : (
-                    documents.map((doc) => (
-                      <div key={doc.id} className="flex items-center justify-between p-2 bg-background/50 rounded border border-border/30">
+                    </p> : documents.map(doc => <div key={doc.id} className="flex items-center justify-between p-2 bg-background/50 rounded border border-border/30">
                         <div className="flex-1 min-w-0">
                           <p className="text-sm font-medium truncate">{doc.name}</p>
                           <p className="text-xs text-muted-foreground">
                             {doc.uploadedAt.toLocaleDateString()}
                           </p>
                         </div>
-                        <Button
-                          onClick={() => removeDocument(doc.id)}
-                          variant="ghost"
-                          size="sm"
-                          className="h-8 w-8 p-0 text-destructive hover:bg-destructive/10"
-                        >
+                        <Button onClick={() => removeDocument(doc.id)} variant="ghost" size="sm" className="h-8 w-8 p-0 text-destructive hover:bg-destructive/10">
                           <Trash2 className="h-4 w-4" />
                         </Button>
-                      </div>
-                    ))
-                  )}
+                      </div>)}
                 </div>
 
                 <Separator />
@@ -304,41 +249,22 @@ const RAGChat = () => {
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
                     <label className="text-sm font-medium">API Key</label>
-                    <Button
-                      onClick={() => setShowApiKeyInput(!showApiKeyInput)}
-                      variant="ghost"
-                      size="sm"
-                      className="h-8 w-8 p-0"
-                    >
+                    <Button onClick={() => setShowApiKeyInput(!showApiKeyInput)} variant="ghost" size="sm" className="h-8 w-8 p-0">
                       <Settings className="h-4 w-4" />
                     </Button>
                   </div>
                   
-                  {showApiKeyInput ? (
-                    <div className="space-y-2">
-                      <Input
-                        type="password"
-                        placeholder="Enter Gemini API Key"
-                        value={apiKey}
-                        onChange={(e) => setApiKey(e.target.value)}
-                        className="text-xs"
-                      />
-                      <Button
-                        onClick={saveApiKey}
-                        size="sm"
-                        className="w-full gradient-primary text-white"
-                      >
+                  {showApiKeyInput ? <div className="space-y-2">
+                      <Input type="password" placeholder="Enter Gemini API Key" value={apiKey} onChange={e => setApiKey(e.target.value)} className="text-xs" />
+                      <Button onClick={saveApiKey} size="sm" className="w-full gradient-primary text-white">
                         <Key className="h-4 w-4 mr-2" />
                         Save Key
                       </Button>
-                    </div>
-                  ) : (
-                    <div className="flex items-center gap-2">
+                    </div> : <div className="flex items-center gap-2">
                       <Badge variant={apiKey ? "default" : "destructive"}>
                         {apiKey ? "API Key Set" : "No API Key"}
                       </Badge>
-                    </div>
-                  )}
+                    </div>}
                 </div>
               </CardContent>
             </Card>
@@ -357,12 +283,7 @@ const RAGChat = () => {
                     <Badge variant="outline" className="border-primary/30">
                       {documents.length} Documents
                     </Badge>
-                    <Button
-                      onClick={clearChat}
-                      variant="ghost"
-                      size="sm"
-                      disabled={messages.length === 0}
-                    >
+                    <Button onClick={clearChat} variant="ghost" size="sm" disabled={messages.length === 0}>
                       <Trash2 className="h-4 w-4" />
                     </Button>
                   </div>
@@ -372,50 +293,31 @@ const RAGChat = () => {
               <CardContent className="flex-1 flex flex-col p-0">
                 {/* Messages Area */}
                 <div className="flex-1 overflow-y-auto p-6 space-y-4">
-                  {messages.length === 0 ? (
-                    <div className="text-center py-12">
+                  {messages.length === 0 ? <div className="text-center py-12">
                       <Sparkles className="h-12 w-12 text-primary mx-auto mb-4" />
                       <h3 className="text-lg font-semibold mb-2">Welcome to RAG Chat</h3>
                       <p className="text-muted-foreground">
                         Upload documents and start chatting with your knowledge base
                       </p>
-                    </div>
-                  ) : (
-                    messages.map((message) => (
-                      <div
-                        key={message.id}
-                        className={`flex gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
-                      >
+                    </div> : messages.map(message => <div key={message.id} className={`flex gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                         <div className={`flex gap-3 max-w-[80%] ${message.role === 'user' ? 'flex-row-reverse' : ''}`}>
-                          <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                            message.role === 'user' 
-                              ? 'bg-primary text-primary-foreground' 
-                              : 'bg-accent text-accent-foreground'
-                          }`}>
+                          <div className={`w-8 h-8 rounded-full flex items-center justify-center ${message.role === 'user' ? 'bg-primary text-primary-foreground' : 'bg-accent text-accent-foreground'}`}>
                             {message.role === 'user' ? <User className="h-4 w-4" /> : <Bot className="h-4 w-4" />}
                           </div>
                           
-                          <div className={`rounded-lg p-3 ${
-                            message.role === 'user'
-                              ? 'bg-primary text-primary-foreground'
-                              : 'bg-background border border-border/50'
-                          }`}>
+                          <div className={`rounded-lg p-3 ${message.role === 'user' ? 'bg-primary text-primary-foreground' : 'bg-background border border-border/50'}`}>
                             <p className="text-sm whitespace-pre-wrap">{message.content}</p>
                             <p className={`text-xs mt-1 opacity-60`}>
                               {message.timestamp.toLocaleTimeString()}
                             </p>
                           </div>
                         </div>
-                      </div>
-                    ))
-                  )}
+                      </div>)}
                   
-                  {isStreaming && (
-                    <div className="flex items-center gap-2 text-muted-foreground">
+                  {isStreaming && <div className="flex items-center gap-2 text-muted-foreground">
                       <Loader2 className="h-4 w-4 animate-spin" />
                       <span className="text-sm">AI is thinking...</span>
-                    </div>
-                  )}
+                    </div>}
                   
                   <div ref={messagesEndRef} />
                 </div>
@@ -423,29 +325,14 @@ const RAGChat = () => {
                 {/* Input Area */}
                 <div className="border-t border-border/50 p-6">
                   <div className="flex gap-2">
-                    <Textarea
-                      placeholder="Ask a question about your documents..."
-                      value={inputMessage}
-                      onChange={(e) => setInputMessage(e.target.value)}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' && !e.shiftKey) {
-                          e.preventDefault();
-                          sendMessage();
-                        }
-                      }}
-                      className="resize-none min-h-[60px]"
-                      disabled={isStreaming}
-                    />
-                    <Button
-                      onClick={sendMessage}
-                      disabled={!inputMessage.trim() || isStreaming || !apiKey}
-                      className="gradient-primary text-white h-[60px] px-4"
-                    >
-                      {isStreaming ? (
-                        <Loader2 className="h-4 w-4 animate-spin" />
-                      ) : (
-                        <Send className="h-4 w-4" />
-                      )}
+                    <Textarea placeholder="Ask a question about your documents..." value={inputMessage} onChange={e => setInputMessage(e.target.value)} onKeyDown={e => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                      e.preventDefault();
+                      sendMessage();
+                    }
+                  }} className="resize-none min-h-[60px]" disabled={isStreaming} />
+                    <Button onClick={sendMessage} disabled={!inputMessage.trim() || isStreaming || !apiKey} className="gradient-primary text-white h-[60px] px-4">
+                      {isStreaming ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
                     </Button>
                   </div>
                 </div>
@@ -454,8 +341,6 @@ const RAGChat = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default RAGChat;
