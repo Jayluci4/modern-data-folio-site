@@ -60,9 +60,9 @@ const About = () => {
                     <p className="text-primary mb-2">Startt • Jan 2025 - Present</p>
                     <ul className="text-muted-foreground space-y-2">
                       <li>• Built NLP pipelines classifying 2L+ startups across 1K+ taxonomies with 99.99% accuracy</li>
-                      <li>• Architected AI-powered investor matchmaking engine serving 150K+ active users</li>
-                      <li>• Deployed production-ready RAG systems using vector search and semantic retrieval</li>
-                      <li>• Led AI infrastructure development and mentored engineering teams</li>
+                      <li>• Led the architecture of a production-grade LLM retrieval engine that matched 150K+ founders to 20K+ investors using fine-tuned SentenceTransformers, PEFT, and Pinecone vector search, achieving >90% NDCG@5 and sub-400ms latency</li>
+                      <li>• Executed an end to end, fully autonomous news aggregation backend using FastAPI, SQLite, APScheduler, and Nginx with SSL for secure, scalable deployments having 10+ news sources</li>
+                      <li>• de</li>
                     </ul>
                   </div>
                 </div>
