@@ -85,7 +85,10 @@ serve(async (req) => {
   try {
     const { message, documents, apiKey } = await req.json();
 
+    console.log('Processing RAG request:', { message, documentsCount: documents?.length || 0, hasApiKey: !!apiKey });
+
     if (!apiKey) {
+      console.error('No API key provided');
       return new Response(
         JSON.stringify({ error: 'API key is required' }),
         { 
@@ -95,7 +98,17 @@ serve(async (req) => {
       );
     }
 
-    console.log('Processing RAG request:', { message, documentsCount: documents?.length || 0 });
+    // Validate API key format
+    if (!apiKey.startsWith('AIza')) {
+      console.error('Invalid API key format');
+      return new Response(
+        JSON.stringify({ error: 'Invalid API key format. Gemini API keys should start with "AIza"' }),
+        { 
+          status: 400, 
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' } 
+        }
+      );
+    }
 
     let context = "";
     let systemPrompt = `You are an AI assistant that helps answer questions based on provided documents. You should be helpful, accurate, and cite information from the documents when relevant.
