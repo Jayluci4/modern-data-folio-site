@@ -47,6 +47,12 @@ const Hero = () => {
         <div className="flex flex-col lg:flex-row items-center gap-12">
           {/* Left side - Text content */}
           <div className="flex-1 text-center lg:text-left animate-fade-in">
+            <div className="mb-4">
+              <p className="text-lg font-medium text-accent animate-fade-in" style={{ animationDelay: '0.2s' }}>
+                Turning messy data into meaningful insight.
+              </p>
+            </div>
+            
             <h1 className="text-5xl lg:text-7xl font-bold mb-6">
               <span className="text-gradient">AI Engineer</span>
               <br />

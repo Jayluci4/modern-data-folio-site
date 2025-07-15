@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Slider } from "@/components/ui/slider";
-import { Code, Database, Brain, TrendingUp, ChevronLeft, ChevronRight, Briefcase, Building, UserCheck } from "lucide-react";
+import { Code, Database, Brain, TrendingUp, Briefcase, Building, UserCheck, GraduationCap } from "lucide-react";
 
 const About = () => {
   const [currentExperience, setCurrentExperience] = useState(0);
@@ -107,169 +106,168 @@ const About = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 mb-16">
-          {/* Experience Stack */}
-          <div className="animate-fade-in relative">
-            <h3 className="text-2xl font-bold mb-6 text-primary flex items-center gap-2">
-              <Briefcase className="h-6 w-6" />
+        {/* Experience Section */}
+        <div className="max-w-4xl mx-auto mb-20">
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold mb-4 text-primary flex items-center justify-center gap-3">
+              <Briefcase className="h-8 w-8" />
               Professional Experience
             </h3>
-            
-            {/* Experience Stack Container */}
-            <div className="relative h-80 perspective-1000">
-              {experiences.map((exp, index) => {
-                const isActive = index === currentExperience;
-                const offset = index - currentExperience;
-                const zIndex = experiences.length - Math.abs(offset);
-                const translateY = offset * 20;
-                const scale = 1 - Math.abs(offset) * 0.1;
-                const opacity = isActive ? 1 : 0.4 - Math.abs(offset) * 0.2;
-                
-                return (
-                  <Card 
-                    key={index} 
-                    className={`glass-card border-border/50 absolute inset-0 transition-all duration-500 ease-out hover:glow-primary ${isActive ? 'animate-pulse-glow' : ''}`}
-                    style={{
-                      transform: `translateY(${translateY}px) scale(${scale})`,
-                      zIndex,
-                      opacity: Math.max(opacity, 0.1)
-                    }}
-                  >
-                    <CardContent className="p-6 h-full overflow-y-auto">
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className="p-2 bg-primary/20 rounded-lg text-primary">
-                          {exp.icon}
-                        </div>
-                        <div>
-                          <h4 className="text-xl font-semibold text-foreground">{exp.title}</h4>
-                          <p className="text-primary font-medium">{exp.company}</p>
-                          <p className="text-sm text-muted-foreground">{exp.description}</p>
-                          <p className="text-sm text-accent font-medium">{exp.period}</p>
-                        </div>
-                      </div>
-                      
-                      <div className="mb-4">
-                        <h5 className="text-sm font-semibold text-foreground mb-2">Key Technologies:</h5>
-                        <div className="flex flex-wrap gap-1">
-                          {exp.technologies.map((tech, i) => (
-                            <Badge key={i} variant="outline" className="text-xs border-primary/30 hover:border-primary/50 transition-colors">
-                              {tech}
-                            </Badge>
-                          ))}
-                        </div>
-                      </div>
-                      
-                      <div>
-                        <h5 className="text-sm font-semibold text-foreground mb-2">Key Highlights:</h5>
-                        <ul className="space-y-2 text-sm text-muted-foreground">
-                          {exp.highlights.map((highlight, i) => (
-                            <li key={i} className="flex items-start gap-2">
-                              <span className="text-primary mt-1 text-xs">▸</span>
-                              <span>{highlight}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </CardContent>
-                  </Card>
-                );
-              })}
-            </div>
-            
-            {/* Experience Slider */}
-            <div className="mt-8 space-y-4">
-              <div className="flex items-center justify-between">
-                <button 
-                  onClick={() => setCurrentExperience(Math.max(0, currentExperience - 1))}
-                  disabled={currentExperience === 0}
-                  className="p-2 rounded-lg bg-primary/20 text-primary hover:bg-primary/30 disabled:opacity-50 disabled:cursor-not-allowed transition-all hover:scale-105"
-                >
-                  <ChevronLeft className="h-4 w-4" />
-                </button>
-                
-                <div className="flex-1 mx-4">
-                  <Slider
-                    value={[currentExperience]}
-                    onValueChange={(value) => setCurrentExperience(value[0])}
-                    max={experiences.length - 1}
-                    step={1}
-                    className="w-full"
-                  />
-                </div>
-                
-                <button 
-                  onClick={() => setCurrentExperience(Math.min(experiences.length - 1, currentExperience + 1))}
-                  disabled={currentExperience === experiences.length - 1}
-                  className="p-2 rounded-lg bg-primary/20 text-primary hover:bg-primary/30 disabled:opacity-50 disabled:cursor-not-allowed transition-all hover:scale-105"
-                >
-                  <ChevronRight className="h-4 w-4" />
-                </button>
-              </div>
-              
-              <div className="text-center">
-                <p className="text-sm text-muted-foreground">
-                  {currentExperience + 1} of {experiences.length}
-                </p>
-              </div>
-            </div>
+            <p className="text-muted-foreground">Journey through impactful roles</p>
           </div>
-
-          {/* Education */}
-          <div className="animate-slide-up">
-            <h3 className="text-2xl font-bold mb-6 text-primary">Education & Certifications</h3>
-            <div className="space-y-4">
-              <Card className="glass-card border-border/50 hover:glow-accent transition-all duration-300">
-                <CardContent className="p-6">
-                  <div className="space-y-4">
-                    <div>
-                      <h4 className="text-lg font-semibold text-foreground">Diploma, AI in Healthcare</h4>
-                      <p className="text-primary font-medium">Stanford CME - Class of 2024</p>
+          
+          {/* Experience Cards Stack */}
+          <div className="space-y-6 mb-8">
+            {experiences.map((exp, index) => (
+              <Card 
+                key={index} 
+                className={`glass-card border-border/50 hover:border-primary/30 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl ${
+                  index === currentExperience ? 'ring-2 ring-primary/20 glow-primary' : ''
+                }`}
+                onClick={() => setCurrentExperience(index)}
+                style={{ cursor: 'pointer' }}
+              >
+                <CardContent className="p-8">
+                  <div className="flex items-start gap-4 mb-6">
+                    <div className="p-3 bg-primary/20 rounded-xl text-primary flex-shrink-0">
+                      {exp.icon}
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="text-2xl font-bold text-foreground mb-1">{exp.title}</h4>
+                      <p className="text-lg text-primary font-semibold">{exp.company}</p>
+                      <p className="text-muted-foreground">{exp.description}</p>
+                      <p className="text-accent font-medium mt-1">{exp.period}</p>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
-              
-              <Card className="glass-card border-border/50 hover:glow-accent transition-all duration-300">
-                <CardContent className="p-6">
-                  <div className="space-y-4">
-                    <div>
-                      <h4 className="text-lg font-semibold text-foreground">B.Tech – Electrical and Electronics Engineering</h4>
-                      <p className="text-primary font-medium">Indian Institute of Technology, Guwahati - Class of 2023</p>
-                    </div>
+                  
+                  <div className="mb-6">
+                    <h5 className="font-semibold text-foreground mb-3 flex items-center gap-2">
+                      <Code className="h-4 w-4 text-primary" />
+                      Technologies
+                    </h5>
                     <div className="flex flex-wrap gap-2">
-                      <Badge variant="secondary" className="animate-pulse-glow">Machine Learning</Badge>
-                      <Badge variant="secondary" className="animate-pulse-glow">Deep Learning</Badge>
-                      <Badge variant="secondary" className="animate-pulse-glow">Statistical Analysis</Badge>
-                      <Badge variant="secondary" className="animate-pulse-glow">Data Visualization</Badge>
+                      {exp.technologies.map((tech, i) => (
+                        <Badge 
+                          key={i} 
+                          variant="outline" 
+                          className="border-primary/30 hover:border-primary/50 hover:bg-primary/10 transition-all hover:scale-105"
+                        >
+                          {tech}
+                        </Badge>
+                      ))}
                     </div>
+                  </div>
+                  
+                  <div>
+                    <h5 className="font-semibold text-foreground mb-3 flex items-center gap-2">
+                      <TrendingUp className="h-4 w-4 text-primary" />
+                      Key Achievements
+                    </h5>
+                    <ul className="space-y-3 text-muted-foreground">
+                      {exp.highlights.map((highlight, i) => (
+                        <li key={i} className="flex items-start gap-3">
+                          <span className="text-primary mt-1 text-sm font-bold">•</span>
+                          <span className="leading-relaxed">{highlight}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </CardContent>
               </Card>
-            </div>
+            ))}
+          </div>
+          
+          {/* Pagination Dots */}
+          <div className="flex justify-center gap-3">
+            {experiences.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentExperience(index)}
+                className={`w-3 h-3 rounded-full transition-all duration-300 hover:scale-125 ${
+                  index === currentExperience 
+                    ? 'bg-primary shadow-lg' 
+                    : 'bg-muted-foreground/30 hover:bg-primary/50'
+                }`}
+                aria-label={`View experience ${index + 1}`}
+              />
+            ))}
           </div>
         </div>
 
-        {/* Skills */}
-        <div className="mb-16">
-          <h3 className="text-2xl font-bold mb-8 text-center text-primary">Technical Skills</h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Education Section */}
+        <div className="max-w-4xl mx-auto mb-20">
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold mb-4 text-primary flex items-center justify-center gap-3">
+              <GraduationCap className="h-8 w-8" />
+              Education & Certifications
+            </h3>
+            <p className="text-muted-foreground">Academic foundation and continuous learning</p>
+          </div>
+          
+          <div className="space-y-6">
+            <Card className="glass-card border-border/50 hover:border-primary/30 hover:scale-[1.02] transition-all duration-300">
+              <CardContent className="p-8">
+                <div className="flex items-start gap-4">
+                  <div className="p-3 bg-accent/20 rounded-xl text-accent flex-shrink-0">
+                    <GraduationCap className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold text-foreground mb-2">Diploma, AI in Healthcare</h4>
+                    <p className="text-lg text-primary font-semibold">Stanford CME</p>
+                    <p className="text-muted-foreground">Class of 2024</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            
+            <Card className="glass-card border-border/50 hover:border-primary/30 hover:scale-[1.02] transition-all duration-300">
+              <CardContent className="p-8">
+                <div className="flex items-start gap-4">
+                  <div className="p-3 bg-accent/20 rounded-xl text-accent flex-shrink-0">
+                    <GraduationCap className="h-6 w-6" />
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="text-xl font-bold text-foreground mb-2">B.Tech – Electrical and Electronics Engineering</h4>
+                    <p className="text-lg text-primary font-semibold">Indian Institute of Technology, Guwahati</p>
+                    <p className="text-muted-foreground mb-4">Class of 2023</p>
+                    <div className="flex flex-wrap gap-2">
+                      <Badge variant="secondary" className="hover:scale-105 transition-transform">Machine Learning</Badge>
+                      <Badge variant="secondary" className="hover:scale-105 transition-transform">Deep Learning</Badge>
+                      <Badge variant="secondary" className="hover:scale-105 transition-transform">Statistical Analysis</Badge>
+                      <Badge variant="secondary" className="hover:scale-105 transition-transform">Data Visualization</Badge>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+
+        {/* Skills Cloud */}
+        <div className="max-w-6xl mx-auto mb-20">
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold mb-4 text-primary">Technical Skills</h3>
+            <p className="text-muted-foreground">Technologies and tools I work with</p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {skills.map((skillGroup, index) => (
               <Card 
                 key={skillGroup.category} 
-                className="glass-card border-border/50 hover:border-primary/30 hover:glow-primary transition-all duration-300 hover:scale-105"
+                className="glass-card border-border/50 hover:border-primary/30 hover:scale-[1.02] transition-all duration-300 group"
                 style={{animationDelay: `${index * 0.1}s`}}
               >
                 <CardContent className="p-6">
-                  <h4 className="font-semibold mb-3 text-gradient">{skillGroup.category}</h4>
+                  <h4 className="font-bold mb-3 text-gradient text-lg">{skillGroup.category}</h4>
                   {skillGroup.description && (
-                    <p className="text-sm text-muted-foreground mb-4 italic">{skillGroup.description}</p>
+                    <p className="text-sm text-muted-foreground mb-4 leading-relaxed">{skillGroup.description}</p>
                   )}
                   <div className="flex flex-wrap gap-2">
                     {skillGroup.items.map((skill, skillIndex) => (
                       <Badge 
                         key={skill} 
                         variant="outline" 
-                        className="border-primary/30 text-xs hover:border-primary/50 hover:bg-primary/10 transition-all duration-200 hover:scale-105"
+                        className="border-primary/30 text-xs hover:border-primary/70 hover:bg-primary/15 transition-all duration-200 hover:scale-110 cursor-default"
                         style={{animationDelay: `${(index * skillGroup.items.length + skillIndex) * 0.05}s`}}
                       >
                         {skill}
@@ -283,21 +281,25 @@ const About = () => {
         </div>
 
         {/* Key Achievements */}
-        <div>
-          <h3 className="text-2xl font-bold mb-8 text-center text-primary">Key Achievements</h3>
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold mb-4 text-primary">Key Achievements</h3>
+            <p className="text-muted-foreground">Notable accomplishments and impact</p>
+          </div>
+          
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {achievements.map((achievement, index) => (
               <Card 
                 key={achievement.title} 
-                className="glass-card border-border/50 text-center hover:glow-accent transition-all duration-300 hover:scale-105 hover:-translate-y-2"
+                className="glass-card border-border/50 text-center hover:border-accent/30 hover:scale-[1.05] hover:-translate-y-1 transition-all duration-300 group"
                 style={{animationDelay: `${index * 0.1}s`}}
               >
                 <CardContent className="p-6">
-                  <div className="inline-flex items-center justify-center w-12 h-12 bg-primary/10 rounded-lg mb-4 text-primary animate-float">
+                  <div className="inline-flex items-center justify-center w-14 h-14 bg-primary/10 rounded-xl mb-4 text-primary group-hover:scale-110 transition-transform duration-300">
                     {achievement.icon}
                   </div>
-                  <h4 className="font-semibold mb-2 text-gradient">{achievement.title}</h4>
-                  <p className="text-sm text-muted-foreground">{achievement.description}</p>
+                  <h4 className="font-bold mb-3 text-gradient text-lg">{achievement.title}</h4>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{achievement.description}</p>
                 </CardContent>
               </Card>
             ))}
