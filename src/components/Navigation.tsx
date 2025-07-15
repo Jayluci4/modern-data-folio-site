@@ -48,10 +48,7 @@ const Navigation = () => {
                 {item.label}
               </button>)}
             
-            <Button size="sm" onClick={() => window.location.href = 'mailto:jayantlohia16@gmail.com'} className="gradient-primary text-white hover:opacity-90 text-base">
-              <Mail className="h-4 w-4 mr-2" />
-              Hire Me
-            </Button>
+            
           </div>
 
           {/* Mobile Menu Button */}
