@@ -193,3 +193,21 @@
   .animate-matrix-rain {
     animation: matrix-rain 20s linear infinite;
   }
+
+  /* Card stacking effects */
+  .card-stack-container {
+    perspective: 1000px;
+  }
+  
+  .card-stack-item {
+    transform-style: preserve-3d;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .card-depth-shadow {
+    box-shadow: 
+      0 4px 6px -1px rgb(0 0 0 / 0.1),
+      0 2px 4px -2px rgb(0 0 0 / 0.1),
+      0 0 0 1px hsl(var(--border)),
+      inset 0 1px 0 0 hsl(var(--muted) / 0.1);
+  }
