@@ -18,9 +18,7 @@ const About = () => {
         "Led full-stack architecture of a large-scale LLM-based matchmaking engine, matching 150K+ founders to 20K+ investors with >90% NDCG@5 and <400ms retrieval latency",
         "Built a production-grade SELF+DoTA RAG framework using namespace-isolated Pinecone vectors for context-specific retrieval across startup, investor, grant, and news domains",
         "Designed hybrid ranking engine using dense + sparse fusion, cross-encoder reranking, and exponential boosting; improved recommendation accuracy and reduced churn by 40%",
-        "Engineered a complete NLP pipeline to classify 200K+ Indian startups into a structured taxonomy of 1,000+ sector-subsector nodes; achieved 99.99% precision",
-        "Developed a custom embedding framework combining PCA-based crystallized vectors, harmonic signal enhancement, and adversarial boosting",
-        "Integrated ecosystem intelligence signals including stealth raises, founder transitions, and investor behavior using internal watchlists"
+        "Engineered a complete NLP pipeline to classify 200K+ Indian startups into a structured taxonomy of 1,000+ sector-subsector nodes; achieved 99.99% precision"
       ]
     },
     {
