@@ -117,17 +117,27 @@ const About = () => {
           </div>
           
           {/* Experience Cards Stack */}
-          <div className="space-y-6 mb-8">
+          <div className="relative max-w-4xl mx-auto h-[600px] mb-8">
             {experiences.map((exp, index) => (
               <Card 
                 key={index} 
-                className={`glass-card border-border/50 hover:border-primary/30 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl ${
-                  index === currentExperience ? 'ring-2 ring-primary/20 glow-primary' : ''
+                className={`absolute inset-0 glass-card border-border/50 transition-all duration-500 cursor-pointer ${
+                  index === currentExperience 
+                    ? 'z-30 scale-100 opacity-100 shadow-2xl border-primary/30 glow-primary' 
+                    : index === currentExperience - 1 || (currentExperience === 0 && index === experiences.length - 1)
+                    ? 'z-20 scale-95 opacity-40 -translate-y-4 shadow-lg'
+                    : 'z-10 scale-90 opacity-20 -translate-y-8 shadow-md'
                 }`}
                 onClick={() => setCurrentExperience(index)}
-                style={{ cursor: 'pointer' }}
+                style={{
+                  transform: index === currentExperience 
+                    ? 'translateY(0) scale(1)' 
+                    : index < currentExperience 
+                    ? `translateY(-${(currentExperience - index) * 8}px) scale(${1 - (currentExperience - index) * 0.05})`
+                    : `translateY(-${(index - currentExperience) * 8}px) scale(${1 - (index - currentExperience) * 0.05})`
+                }}
               >
-                <CardContent className="p-8">
+                <CardContent className="p-8 h-full overflow-y-auto">
                   <div className="flex items-start gap-4 mb-6">
                     <div className="p-3 bg-primary/20 rounded-xl text-primary flex-shrink-0">
                       {exp.icon}
@@ -183,9 +193,9 @@ const About = () => {
               <button
                 key={index}
                 onClick={() => setCurrentExperience(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 hover:scale-125 ${
+                className={`w-4 h-4 rounded-full transition-all duration-300 hover:scale-125 ${
                   index === currentExperience 
-                    ? 'bg-primary shadow-lg' 
+                    ? 'bg-primary shadow-lg shadow-primary/50 animate-pulse-glow' 
                     : 'bg-muted-foreground/30 hover:bg-primary/50'
                 }`}
                 aria-label={`View experience ${index + 1}`}
