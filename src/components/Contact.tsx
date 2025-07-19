@@ -77,7 +77,7 @@ const Contact = () => {
 
         <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
           {/* Contact Form */}
-          <Card className="glass-card border-border/50">
+          <Card className="glass-card border-border/50 h-fit">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-2xl">
                 <MessageSquare className="h-6 w-6 text-primary" />
